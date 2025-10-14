@@ -24,6 +24,20 @@ const userSchema = new mongoose.Schema({
       message: (props) => `${props.value} não é um link válido!`,
     },
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    validate:{
+      validator: validator.isEmail,
+    message: "Email inválido"
+  }
+},
+password: {
+  type:String,
+  required:true,
+  select:false
+},
 });
 
 export default mongoose.model('User', userSchema);

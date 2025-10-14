@@ -1,4 +1,5 @@
 import User from '../models/user.js';
+import bcrypt from "bcryptjs";
 
 export const getUsers = (req, res) => {
   User.find({})
@@ -20,15 +21,18 @@ export const getUserById = (req, res) => {
     });
 };
 
-export const createUser = (req, res) => {
-  const { name, about, avatar } = req.body;
-  if (!name || !about || !avatar) {
+export const createUser = (req, res, next) => {
+  const { name, about, avatar, email, password } = req.body;
+  
+  if (!name || !about || !avatar || !email || !password) {
     return res.status(400).json({ message: 'Faltam campos obrigatórios' });
   }
-
-  User.create({ name, about, avatar })
+  bcrypt.hash(password, 10)
+  .then(hash => {
+  return User.create({ name, about, avatar, email, password: hash });
+  })
     .then((user) => res.status(201).send(user))
-    .catch((err) => res.status(400).send({ message: err.message }));
+    .catch(next);
 };
 
 export const updateUser = (req, res) => {

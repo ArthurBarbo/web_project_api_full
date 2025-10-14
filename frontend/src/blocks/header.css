@@ -20,8 +20,13 @@
   padding-bottom: 46px;
 }
 .header__email {
+  flex: 1 1 auto; 
+  min-width: 0;    
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; 
   color: white;
-  width: 141px;
+  max-width: 141px;
   font-family: "Inter";
   font-weight: 500;
   font-size: 18px;
@@ -42,7 +47,7 @@
 
 @media screen and (max-width: 530px) {
   .header__logo {
-    width: 126px;
+    max-width: 126px;
   }
   .header__top {
     display: flex;
@@ -80,6 +85,6 @@
     cursor: pointer;
   }
   .header__email {
-    width: 126px;
+    max-width: 126px;
   }
 }
