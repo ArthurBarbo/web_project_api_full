@@ -1,0 +1,75 @@
+.tool__overlay {
+  background-color: rgba(0, 0, 0, 0.507);
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool__conteiner {
+  width: 430px;
+  height: 330px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+.tool__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 60px;
+}
+
+.tool__message {
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 24px;
+  text-align: center;
+  width: 358px;
+  height: 58px;
+}
+
+.tool__icon {
+  width: 120px;
+  height: 120px;
+}
+.tool__close:hover {
+  color: black;
+  opacity: 0.8;
+}
+.tool__close {
+  background: transparent url(../../images/Close.svg) center no-repeat;
+  width: 40px;
+  height: 40px;
+  top: -40px;
+  right: -43px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  color: white;
+  position: absolute;
+}
+
+@media screen and (max-width: 530px) {
+  .tool__conteiner {
+    width: 280px;
+  }
+  .tool__message {
+    font-size: 20px;
+    width: 242px;
+  }
+  .tool__close {
+    width: 30px;
+    height: 30px;
+    top: -66px;
+    left: 125px;
+  }
+}

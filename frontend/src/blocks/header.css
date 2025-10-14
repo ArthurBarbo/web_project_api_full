@@ -1,0 +1,85 @@
+.header {
+  max-width: 880px;
+  width: 100%;
+  border-width: 1px;
+  margin: 0 auto 40px auto;
+  border-bottom: 1px solid rgba(84, 84, 84, 1);
+  padding-top: 45px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header__logo {
+  padding-bottom: 41px;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  padding-bottom: 46px;
+}
+.header__email {
+  color: white;
+  width: 141px;
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 18px;
+  text-align: right;
+  height: 22px;
+  margin: 0;
+}
+
+.header__logout {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 530px) {
+  .header__logo {
+    width: 126px;
+  }
+  .header__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .header__user {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header__menu-icon:hover {
+    opacity: 0.6;
+  }
+  .header__menu-icon {
+    padding-bottom: 41px;
+    cursor: pointer;
+  }
+  .header__expanded {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .header__close {
+    background: transparent url(../images/Close.svg) center no-repeat;
+    width: 30px;
+    height: 30px;
+    top: -40px;
+    right: -43px;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+  }
+  .header__email {
+    width: 126px;
+  }
+}

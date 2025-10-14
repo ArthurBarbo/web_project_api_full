@@ -1,0 +1,105 @@
+.login__page {
+  margin: 0 auto;
+}
+
+.login__title {
+  margin: 20px 0 20px 0;
+  font-family: "Inter";
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  text-align: center;
+  color: white;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 50px;
+  width: 358px;
+}
+.login__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 358px;
+}
+
+.login__email,
+.login__password {
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+  padding: 0 0 13px;
+  background-color: transparent;
+  color: white;
+}
+
+.login__button:hover {
+  color: black;
+  opacity: 0.8;
+}
+.login__button {
+  margin-top: 186px;
+  max-width: 358px;
+  height: 50px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.login__enter:hover {
+  opacity: 0.6;
+}
+.login__enter {
+  max-width: 52px;
+  height: 22px;
+  color: white;
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 18px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.login__register {
+  font-family: "Inter";
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  text-align: center;
+  color: white;
+  font-style: none;
+}
+
+.login__link-style:hover {
+  color: gray;
+  opacity: 0.9;
+}
+.login__link-style {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 530px) {
+  .login__container,
+  .login__form {
+    width: 260px;
+  }
+
+  .login__title {
+    font-size: 20px;
+    width: 260px;
+  }
+
+  .login__register {
+    width: 260px;
+    font-size: 12px;
+  }
+  .login__enter {
+    font-size: 14px;
+  }
+}
