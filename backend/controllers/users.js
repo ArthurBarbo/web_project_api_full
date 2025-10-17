@@ -14,13 +14,28 @@ export const getUserById = (req, res) => {
   User.findById(userId)
     .then((user) => {
       if (!user) return res.status(404).send({ message: 'usuário não encontrado' });
-      res.send(user);
+      res.send({data: user});
     })
     .catch((err) => {
       if (err.name === 'CastError') return res.status(400).send({ message: 'ID inválido' });
       res.status(500).send({ message: err.message });
     });
 };
+
+export const getCurrentUser = (req, res) => {
+  const userId = req.user._id;
+
+  User.findById(userId)
+    .then(user => {
+      if (!user) {
+         return res.status(404).send({ message: 'usuário não encontrado' });
+      }
+      res.send({data: user});
+    })
+    .catch(err => { res.status(500).send({ message: 'Erro interno do servidor'});
+  });
+} 
+    
 
 export const login = (req, res, next) =>{
   const{email, password} = req.body

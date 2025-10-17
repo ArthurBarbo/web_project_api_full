@@ -1,7 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cards from './routes/cards.js';
-import users from './routes/users.js';
+import { createUser, login } from './controllers/users.js';
 
 const app = express();
 app.use(express.json());
@@ -18,8 +17,9 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/cards', cards);
-app.use('/users', users);
+app.post('/signin', login);
+app.post('/signup', createUser);
+
 
 app.use((req, res) => {
   res.status(404).json({ message: 'A solicitação não foi encontrada' });
