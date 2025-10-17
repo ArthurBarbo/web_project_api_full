@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import validator from 'validator';
 import { patternURL } from './card.js';
 
 const userSchema = new mongoose.Schema({
@@ -6,17 +7,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: true,
+    default: 'Jacques Cousteau'
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    required: true,
+    default: 'Explorer'
   },
   avatar: {
     type: String,
-    required: true,
+    default: "https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png",
     validate: {
       validator(v) {
         return patternURL.test(v);
@@ -36,7 +37,7 @@ const userSchema = new mongoose.Schema({
 password: {
   type:String,
   required:true,
-  select:false
+  select:false 
 },
 });
 

@@ -1,5 +1,6 @@
 import User from '../models/user.js';
 import bcrypt from "bcryptjs";
+import jwt from 'jsonwebtoken';
 
 export const getUsers = (req, res) => {
   User.find({})
@@ -21,10 +22,32 @@ export const getUserById = (req, res) => {
     });
 };
 
+export const login = (req, res, next) =>{
+  const{email, password} = req.body
+  User.findOne({ email }).select('+password')
+  .then((user)=>{
+    if(!user) {
+      return res.status (401).json({ message: 'Email ou senha não encontrados'})
+    }
+    return bcrypt.compare(password, user.password)
+    .then((matched) => {
+      if(!matched) {
+        return res.status(401).json({ message: "Email ou senha não encontrados"});
+      }
+
+    const token = jwt.sign({ _id: user._id},
+      process.env. JWT_SECRET ||'dev-secret',
+      { expiresIn: '7d'}
+    );
+    res.send({ token });
+    });
+  })
+  .catch(next);
+};
 export const createUser = (req, res, next) => {
   const { name, about, avatar, email, password } = req.body;
   
-  if (!name || !about || !avatar || !email || !password) {
+  if ( !email || !password) {
     return res.status(400).json({ message: 'Faltam campos obrigatórios' });
   }
   bcrypt.hash(password, 10)
