@@ -7,17 +7,17 @@ const userSchema = new mongoose.Schema({
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Jacques Cousteau'
+    default: 'Jacques Cousteau',
   },
   about: {
     type: String,
     minlength: 2,
     maxlength: 30,
-    default: 'Explorer'
+    default: 'Explorer',
   },
   avatar: {
     type: String,
-    default: "https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png",
+    default: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
     validate: {
       validator(v) {
         return patternURL.test(v);
@@ -29,16 +29,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     unique: true,
-    validate:{
+    validate: {
       validator: validator.isEmail,
-    message: "Email inválido"
-  }
-},
-password: {
-  type:String,
-  required:true,
-  select:false 
-},
+      message: 'Email inválido',
+    },
+  },
+  password: {
+    type: String,
+    required: true,
+    select: false,
+  },
 });
 
 export default mongoose.model('User', userSchema);

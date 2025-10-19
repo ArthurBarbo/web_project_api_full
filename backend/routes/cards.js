@@ -1,4 +1,5 @@
 import { Router } from 'express';
+import { validateCreateCard, validateId } from '../middlewares/validation.js';
 import {
   createCard,
   deleteById,

@@ -1,6 +1,7 @@
-import User from '../models/user.js';
-import bcrypt from "bcryptjs";
+import bcrypt from 'bcryptjs';
+
 import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 import 'dotenv/config';
 
 export const getUsers = (req, res) => {
@@ -15,7 +16,7 @@ export const getUserById = (req, res) => {
   User.findById(userId)
     .then((user) => {
       if (!user) return res.status(404).send({ message: 'usuário não encontrado' });
-      res.send({data: user});
+      res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') return res.status(400).send({ message: 'ID inválido' });
@@ -23,53 +24,55 @@ export const getUserById = (req, res) => {
     });
 };
 
-export const getCurrentUser = (req, res,next) => {
+export const getCurrentUser = (req, res, next) => {
   const userId = req.user._id;
 
   User.findById(userId)
-    .then(user => {
+    .then((user) => {
       if (!user) {
-         return res.status(404).json({ message: 'usuário não encontrado' });
+        return res.status(404).json({ message: 'usuário não encontrado' });
       }
-      res.json({data: user});
+      res.json({ data: user });
     })
     .catch(next);
-} 
-    
+};
 
-export const login = (req, res, next) =>{
-  const{email, password} = req.body
+export const login = (req, res, next) => {
+  const { email, password } = req.body;
   User.findOne({ email }).select('+password')
-  .then((user)=>{
-    if(!user) {
-      return res.status (401).json({ message: 'Email ou senha não encontrados'})
-    }
-    return bcrypt.compare(password, user.password)
-    .then((matched) => {
-      if(!matched) {
-        return res.status(401).json({ message: "Email ou senha não encontrados"});
+    .then((user) => {
+      if (!user) {
+        return res.status(401).json({ message: 'Email ou senha não encontrados' });
       }
+      return bcrypt.compare(password, user.password)
+        .then((matched) => {
+          if (!matched) {
+            return res.status(401).json({ message: 'Email ou senha não encontrados' });
+          }
 
-    const token = jwt.sign({ _id: user._id},
-      process.env.JWT_SECRET || 'dev-secret-key',
-      { expiresIn: '7d'}
-    );
-    console.log("chave do login:", process.env.JWT_SECRET||'dev-secret-key');
-    res.send({ token });
-    });
-  })
-  .catch(next);
+          const token = jwt.sign(
+            { _id: user._id },
+            process.env.JWT_SECRET || 'dev-secret-key',
+            { expiresIn: '7d' },
+          );
+          console.log('chave do login:', process.env.JWT_SECRET || 'dev-secret-key');
+          res.send({ token });
+        });
+    })
+    .catch(next);
 };
 export const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
-  
-  if ( !email || !password) {
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
+
+  if (!email || !password) {
     return res.status(400).json({ message: 'Faltam campos obrigatórios' });
   }
   bcrypt.hash(password, 10)
-  .then(hash => {
-  return User.create({ name, about, avatar, email, password: hash });
-  })
+    .then((hash) => User.create({
+      name, about, avatar, email, password: hash,
+    }))
     .then((user) => res.status(201).send(user))
     .catch(next);
 };
