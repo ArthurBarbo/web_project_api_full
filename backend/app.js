@@ -1,24 +1,25 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import auth from './middlewares/auth.js';
+import cards from './routes/cards.js';
+import users from './routes/users.js';
 import { createUser, login } from './controllers/users.js';
 
 const app = express();
 app.use(express.json());
 
-mongoose.connect('mongodb://localhost:27017/aroundb', {});
+mongoose.connect(process.env.MONGO_URL, {});
 
 // eslint-disable-next-line no-unused-vars
-const PORT = process.env.PORT || 3000;
-app.use((req, res, next) => {
-  req.user = {
-    _id: '68d1a7c67f1a6be84dff5bee',
-  };
-
-  next();
-});
+const PORT = process.env.PORT;
 
 app.post('/signin', login);
 app.post('/signup', createUser);
+
+
+app.use(auth);
+app.use('/cards', cards);
+app.use('/users', users);
 
 
 app.use((req, res) => {

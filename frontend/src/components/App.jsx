@@ -17,19 +17,25 @@ function App() {
   const [infoMessage, setInfoMessage] = useState("");
   const [isSucess, setIsSucess] = useState(false);
   const [cards, setCards] = useState([]);
+  const [token, setToken] = useState('');
   const navigate = useNavigate();
   useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (!token) return;
+    const savedToken = localStorage.getItem("jwt");
+    if (!savedToken) return;
 
-    checkToken(token)
+    setToken(savedToken);
+
+    checkToken(savedToken)
       .then((data) => {
         setCurrentUser({ email: data.data.email });
         navigate("/");
+        console.log(data);
       })
       .catch((err) => {
         console.error("Erro ao validar Token:", err);
         localStorage.removeItem("jwt");
+        setToken('');
+        
       });
 
     api

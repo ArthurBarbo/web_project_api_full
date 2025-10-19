@@ -1,6 +1,7 @@
 import User from '../models/user.js';
 import bcrypt from "bcryptjs";
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 export const getUsers = (req, res) => {
   User.find({})
@@ -22,18 +23,17 @@ export const getUserById = (req, res) => {
     });
 };
 
-export const getCurrentUser = (req, res) => {
+export const getCurrentUser = (req, res,next) => {
   const userId = req.user._id;
 
   User.findById(userId)
     .then(user => {
       if (!user) {
-         return res.status(404).send({ message: 'usuário não encontrado' });
+         return res.status(404).json({ message: 'usuário não encontrado' });
       }
-      res.send({data: user});
+      res.json({data: user});
     })
-    .catch(err => { res.status(500).send({ message: 'Erro interno do servidor'});
-  });
+    .catch(next);
 } 
     
 
@@ -51,9 +51,10 @@ export const login = (req, res, next) =>{
       }
 
     const token = jwt.sign({ _id: user._id},
-      process.env. JWT_SECRET ||'dev-secret',
+      process.env.JWT_SECRET || 'dev-secret-key',
       { expiresIn: '7d'}
     );
+    console.log("chave do login:", process.env.JWT_SECRET||'dev-secret-key');
     res.send({ token });
     });
   })
