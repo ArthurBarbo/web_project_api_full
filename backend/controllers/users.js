@@ -1,5 +1,4 @@
 import bcrypt from 'bcryptjs';
-
 import jwt from 'jsonwebtoken';
 import User from '../models/user.js';
 import 'dotenv/config';
@@ -55,7 +54,6 @@ export const login = (req, res, next) => {
             process.env.JWT_SECRET || 'dev-secret-key',
             { expiresIn: '7d' },
           );
-          console.log('chave do login:', process.env.JWT_SECRET || 'dev-secret-key');
           res.send({ token });
         });
     })

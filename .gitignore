@@ -2,6 +2,8 @@
 logs
 *.log
 npm-debug.log*
+request.log
+error.log
 
 # Diretório de dependências
 node_modules
@@ -13,5 +15,4 @@ node_modules
 .DS_Store
 .idea
 .vscode
-
 .env

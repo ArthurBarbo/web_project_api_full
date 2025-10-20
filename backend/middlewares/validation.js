@@ -38,10 +38,10 @@ export const validateUpdateAvatar = celebrate ({
         avatar: Joi.string().required().custom(validateURL)
     })
 })
-export const validateUpdateAvatar = celebrate({
+export const validateUpdateUser = celebrate({
     body:Joi.object({
-        name: joi.string().min(2).max(30),
-        about: joi.string().min(2).max(30)
+        name: Joi.string().min(2).max(30),
+        about: Joi.string().min(2).max(30)
     })
 })
 
