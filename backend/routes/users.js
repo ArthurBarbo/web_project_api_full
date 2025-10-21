@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import { Router } from 'express';
-import { validateId, validateUpdateAvatar, validateUpdateUser} from '../middlewares/validation.js';
+import { validateId, validateUpdateAvatar, validateUpdateUser } from '../middlewares/validation.js';
 import {
   getUsers,
   getUserById,

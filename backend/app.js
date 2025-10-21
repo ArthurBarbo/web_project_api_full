@@ -15,16 +15,16 @@ const requestLogger = winston.createLogger({
   level: 'info',
   format: winston.format.json(),
   transports: [
-    new winston.transports.File({ filename: 'request.log'})
-  ]
+    new winston.transports.File({ filename: 'request.log' }),
+  ],
 });
 
 const errorLogger = winston.createLogger({
   level: 'error',
   format: winston.format.json(),
   transports: [
-    new winston.transports.File({ filename: 'error.log'})
-  ]
+    new winston.transports.File({ filename: 'error.log' }),
+  ],
 });
 
 mongoose.connect(process.env.MONGO_URL, {});
@@ -35,21 +35,19 @@ app.use((req, res, next) => {
     method: req.method,
     url: req.originalUrl,
     ip: req.ip,
-    userAgent: req.get('User-Agent')
+    userAgent: req.get('User-Agent'),
   });
   next();
-})
+});
 // eslint-disable-next-line no-unused-vars
-const PORT = process.env.PORT;
+const { PORT } = process.env;
 
 app.post('/signin', validateLogin, login);
-app.post('/signup', validateCreateUser , createUser);
-
+app.post('/signup', validateCreateUser, createUser);
 
 app.use(auth);
 app.use('/cards', cards);
 app.use('/users', users);
-
 
 app.use((req, res) => {
   res.status(404).json({ message: 'A solicitação não foi encontrada' });
@@ -57,18 +55,18 @@ app.use((req, res) => {
 
 app.use(errors());
 
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
   errorLogger.error({
     timestamp: new Date().toISOString(),
     error: err.message,
     stack: err.stack,
     method: req.method,
     url: req.originalUrl,
-    statusCode: err.statusCode || 500
+    statusCode: err.statusCode || 500,
   });
-  const {statusCode=500, message} =err;
+  const { statusCode = 500, message } = err;
   res.status(statusCode).json({
-    message: statusCode===500 ? 'Erro interno do servidor': message
+    message: statusCode === 500 ? 'Erro interno do servidor' : message,
   });
 });
 
