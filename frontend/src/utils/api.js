@@ -65,9 +65,8 @@
     });
   }
 }
-const baseUrl ="https://around-api.pt-br.tripleten-services.com/v1"
+const baseUrl ="https://api.around.mambodev.com"
 const headers = {
-    authorization:"79b24936-a205-4985-b1d0-6eeb1d8f406b",
     "Content-Type": "application/json"
 }
 
