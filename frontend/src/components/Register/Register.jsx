@@ -13,9 +13,7 @@ export default function Register({ newUser, showTooltip }) {
     e.preventDefault();
     setError("");
 
-    console.log("Email:", email);
-    console.log("Senha:", password);
-
+    
     if (!email && !password) {
       setError("Preencha todos os campos");
       return;

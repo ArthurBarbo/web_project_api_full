@@ -1,4 +1,4 @@
-const BASE_URL = "api.around.mambodev.com";
+const BASE_URL = "https://api.around.mambodev.com";
 
 export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {

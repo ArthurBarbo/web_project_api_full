@@ -10,9 +10,9 @@ import { Utils } from "../components/utils.js";
 
 
 const api = new Api({
-  baseUrl: "https://around-api.pt-br.tripleten-services.com/v1",
+  baseUrl: "https://api.around.mambodev.com", 
   headers: {
-    authorization: "79b24936-a205-4985-b1d0-6eeb1d8f406b",
+    authorization: token ? `Bearer ${token}` : "",
     "Content-Type": "application/json",
   },
 });

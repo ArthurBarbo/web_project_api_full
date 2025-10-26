@@ -5,9 +5,15 @@
   }
 
   _makeRequest(baseUrl, method = "GET", body = null) {
+    const token = localStorage.getItem("jwt");
+    
+    
+    
     const options = {
       method,
-      headers: this._headers,
+      headers: {...this._headers,
+        ...(token && {Authorization: `Bearer ${token}`})
+      },
     };
 
     if (body) {

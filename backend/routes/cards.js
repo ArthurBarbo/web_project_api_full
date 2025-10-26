@@ -12,12 +12,11 @@ const router = Router();
 
 router.get('/', getCards);
 
-router.delete('/:cardId', deleteById);
+router.delete('/:cardId', validateId, deleteById);
 
-router.post('/', createCard);
+router.put('/:cardId/likes', validateId, likeCard);
 
-router.put('/:cardId/likes', likeCard);
+router.delete('/:cardId/likes', validateId, dislikeCard);
 
-router.delete('/:cardId/likes', dislikeCard);
-
+router.post('/', validateCreateCard, createCard);
 export default router;

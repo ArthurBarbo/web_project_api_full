@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import winston from 'winston';
 import mongoose from 'mongoose';
@@ -7,9 +8,14 @@ import cards from './routes/cards.js';
 import users from './routes/users.js';
 import { validateLogin, validateCreateUser } from './middlewares/validation.js';
 import { createUser, login } from './controllers/users.js';
+import cors from 'cors'
+
+
 
 const app = express();
 app.use(express.json());
+
+app.use(cors());
 
 const requestLogger = winston.createLogger({
   level: 'info',
@@ -27,7 +33,7 @@ const errorLogger = winston.createLogger({
   ],
 });
 
-mongoose.connect(process.env.MONGO_URL, {});
+mongoose.connect(process.env.MONGO_URI, {});
 
 app.use((req, res, next) => {
   requestLogger.info({
