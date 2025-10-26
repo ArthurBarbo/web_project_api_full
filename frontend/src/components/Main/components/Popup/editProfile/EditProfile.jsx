@@ -17,16 +17,16 @@ export default function EditProfile({ onClose }) {
     }
   }, [currentUser, setValues]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleUpdateUser({ name: values.name, about: values.about })
-      .then(() => {
+    try{
+    await handleUpdateUser({ name: values.name, about: values.about });
         resetForm();
         onClose();
-      })
-      .catch((err) => console.error(err));
+      } catch(err) {
+      console.error(err);
+  }
   };
-
   return (
     <form className="popup__profile" onSubmit={handleSubmit} noValidate>
       <label htmlFor="name"></label>

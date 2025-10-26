@@ -14,12 +14,16 @@
       headers: {...this._headers,
         ...(token && {Authorization: `Bearer ${token}`})
       },
+      cache:'no-store',
     };
 
     if (body) {
       options.body = JSON.stringify(body);
+     
     }
 
+    
+    
     return fetch(baseUrl, options).then((res) => {
       if (!res.ok) {
         return Promise.reject(`Erro: ${res.status}`);

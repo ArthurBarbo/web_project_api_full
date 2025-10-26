@@ -15,7 +15,28 @@ import cors from 'cors'
 const app = express();
 app.use(express.json());
 
-app.use(cors());
+
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  const { method } = req;
+  
+  
+  res.header('Access-Control-Allow-Origin', '*');
+  
+  
+  res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.header('Pragma', 'no-cache');
+  res.header('Expires', '0');
+  
+  
+  if (method === 'OPTIONS') {
+    res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    return res.end();
+  }
+  
+  next();
+});
 
 const requestLogger = winston.createLogger({
   level: 'info',

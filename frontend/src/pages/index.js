@@ -8,11 +8,10 @@ import { Api } from "../components/Api.js";
 import { Utils } from "../components/utils.js";
 
 
-
 const api = new Api({
-  baseUrl: "https://api.around.mambodev.com", 
+  baseUrl: "https://api.around.mambodev.com/users/me", 
   headers: {
-    authorization: token ? `Bearer ${token}` : "",
+
     "Content-Type": "application/json",
   },
 });
@@ -109,7 +108,7 @@ api
     console.error("Erro ao carregar dados do usuário:", err);
   });
 
-const profilePopup = new PopupWithForm("#popup-profile", (formData) => {
+const profilePopup = new PopupWithForm("#popup-profile", (formData) => { 
   return api
     .updateUserInfo({
       name: formData.name,

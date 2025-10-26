@@ -29,6 +29,7 @@ function App() {
       .then((data) => {
         setCurrentUser({ email: data.data.email });
         navigate("/");
+        console.log(data);
       })
       .catch((err) => {
         console.error("Erro ao validar Token:", err);

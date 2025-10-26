@@ -18,7 +18,7 @@ export default function Main({ cards, setCards }) {
   const [cardToDelete, setCardToDelete] = useState(null);
 
   async function handleCardLike(card) {
-    const isLiked = card.isLiked;
+    const isLiked = card.likes?.some((like)=>like._id === currentUser._id) || false 
 
     await api
       .changeLikeCardStatus(card._id, !isLiked)
@@ -114,6 +114,7 @@ export default function Main({ cards, setCards }) {
           <Card
             key={card._id}
             card={card}
+            isLiked={card.likes?.some(like=>like._id === currentUser._id)}
             onImageClick={setselectedCard}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
