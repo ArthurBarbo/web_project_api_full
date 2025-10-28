@@ -1,7 +1,13 @@
-export default function Card(props) {
-  const { card, onImageClick, onCardLike, onCardDelete } = props;
-  const { name, link, isLiked } = card;
+import { useContext } from "react";
+import CurrentUserContext from "../../../../contexts/CurrentUserContext";
 
+
+
+export default function Card(props) {
+  const {currentUser} = useContext(CurrentUserContext)
+  const { card, onImageClick, onCardLike, onCardDelete } = props;
+  const { name, link, likes } = card;
+  const isLiked = likes.includes(currentUser._id);
   const cardLikeBtn = `elements__like${isLiked ? " elements__like-on" : ""} `;
 
   function handleLikeClick() {

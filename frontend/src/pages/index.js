@@ -7,11 +7,12 @@ import { Card } from "../components/Card.js";
 import { Api } from "../components/Api.js";
 import { Utils } from "../components/utils.js";
 
+const token = localStorage.getItem("jwt");
 
 const api = new Api({
   baseUrl: "https://api.around.mambodev.com/users/me", 
   headers: {
-
+    authorization: token ? `Bearer ${token}` : "",
     "Content-Type": "application/json",
   },
 });

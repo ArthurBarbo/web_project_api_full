@@ -18,14 +18,19 @@ export default function Main({ cards, setCards }) {
   const [cardToDelete, setCardToDelete] = useState(null);
 
   async function handleCardLike(card) {
-    const isLiked = card.likes?.some((like)=>like._id === currentUser._id) || false 
+    const isLiked = card.likes.includes(currentUser._id);
+
 
     await api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
+      
         setCards((state) =>
-          state.map((currentCard) =>
-            currentCard._id === card._id ? newCard : currentCard
+          state.map((currentCard) => {
+       
+            
+           return currentCard._id === card._id ? newCard : currentCard
+          }
           )
         );
       })
@@ -114,7 +119,6 @@ export default function Main({ cards, setCards }) {
           <Card
             key={card._id}
             card={card}
-            isLiked={card.likes?.some(like=>like._id === currentUser._id)}
             onImageClick={setselectedCard}
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}

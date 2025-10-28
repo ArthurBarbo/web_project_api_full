@@ -27,7 +27,6 @@ function App() {
 
     checkToken(savedToken)
       .then((data) => {
-        setCurrentUser({ email: data.data.email });
         navigate("/");
         console.log(data);
       })
@@ -41,10 +40,7 @@ function App() {
     api
       .getUserInfo()
       .then((userData) => {
-        setCurrentUser((prev) => ({
-          ...userData,
-          email: prev?.email,
-        }));
+        setCurrentUser(userData.data) 
       })
       .catch((err) => console.log("Erro ao buscar dados do usuário", err));
 
