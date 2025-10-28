@@ -10,7 +10,7 @@ export default function Login({ onLogin, showTooltip }) {
   const navigate = useNavigate();
 
   function handleSubmit(e) {
-    e.preventDefault();
+   if(e) e.preventDefault();
     setError("");
 
     if (email && password) {
@@ -32,7 +32,7 @@ export default function Login({ onLogin, showTooltip }) {
   return (
     <div className="login__page">
       <Header>
-        <h3 className="login__enter" onSubmit={handleSubmit}>
+        <h3 className="login__enter" onClick={handleSubmit}>
           Entrar
         </h3>
       </Header>
