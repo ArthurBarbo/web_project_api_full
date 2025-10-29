@@ -58,8 +58,7 @@ A aplicação funciona como uma **rede social de compartilhamento de imagens**, 
 │ ├── routes/
 │ ├── controllers/
 │ ├── models/
-│ ├── middlewares/
-│ └── utils/
+│ └── middlewares/
 │
 ├── 📁 frontend/
 │ ├── src/
