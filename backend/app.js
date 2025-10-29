@@ -1,40 +1,35 @@
+/* eslint-disable no-unused-vars */
 import 'dotenv/config';
 import express from 'express';
 import winston from 'winston';
 import mongoose from 'mongoose';
 import { errors } from 'celebrate';
+import cors from 'cors';
 import auth from './middlewares/auth.js';
 import cards from './routes/cards.js';
 import users from './routes/users.js';
 import { validateLogin, validateCreateUser } from './middlewares/validation.js';
 import { createUser, login } from './controllers/users.js';
-import cors from 'cors'
-
-
 
 const app = express();
 app.use(express.json());
 
-
 app.use((req, res, next) => {
   const { origin } = req.headers;
   const { method } = req;
-  
-  
+
   res.header('Access-Control-Allow-Origin', '*');
-  
-  
+
   res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.header('Pragma', 'no-cache');
   res.header('Expires', '0');
-  
-  
+
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     return res.end();
   }
-  
+
   next();
 });
 
@@ -66,7 +61,7 @@ app.use((req, res, next) => {
   });
   next();
 });
-// eslint-disable-next-line no-unused-vars
+
 const { PORT } = process.env;
 
 app.post('/signin', validateLogin, login);

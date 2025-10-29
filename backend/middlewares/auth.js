@@ -8,7 +8,6 @@ const auth = (req, res, next) => {
     return res.status(403).send({ message: 'Autorização necessária' });
   }
   const token = authorization.replace('Bearer ', '');
- 
 
   try {
     const payload = jwt.verify(token, process.env.JWT_SECRET || 'dev-secret-key');
