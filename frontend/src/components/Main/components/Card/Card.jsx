@@ -6,7 +6,9 @@ import CurrentUserContext from "../../../../contexts/CurrentUserContext";
 export default function Card(props) {
   const {currentUser} = useContext(CurrentUserContext)
   const { card, onImageClick, onCardLike, onCardDelete } = props;
-  const { name, link, likes } = card;
+  const { name, link, likes, owner } = card;
+
+  const isOwn = owner._id? owner._id === currentUser._id : owner === currentUser._id
   const isLiked = likes.includes(currentUser._id);
   const cardLikeBtn = `elements__like${isLiked ? " elements__like-on" : ""} `;
 
@@ -25,13 +27,14 @@ export default function Card(props) {
         alt={name}
         onClick={() => onImageClick(card)}
       />
-
+    {isOwn && (
       <button
         className="elements__remove"
         type="button"
         aria-label="trash"
         onClick={handleDeleteClick}
       />
+    )}
 
       <div className="elements__caption">
         <p className="elements__text">{name}</p>

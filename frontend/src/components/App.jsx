@@ -57,12 +57,13 @@ function App() {
     return api.updateAvatar(avatarUrl).then(setCurrentUser);
   };
   const handleAddCard = (newCard) => {
-    api.createCard(newCard).then((createdCard) => {
+     return api.createCard(newCard).then((createdCard) => {
       setCards((prevCards) => [createdCard, ...prevCards]);
       return createdCard;
     });
   };
   const showTooltip = (message, sucess = false) => {
+    
     setInfoMessage(message);
     setIsSucess(sucess);
     setIsInfoOpen(true);
@@ -88,7 +89,7 @@ function App() {
         navigate("/signin");
       })
       .catch((err) => {
-        showTooltip(err, false);
+        showTooltip("Erro na autenticação, verifique seus dados", false);
       });
   };
   const handleLogout = () => {
