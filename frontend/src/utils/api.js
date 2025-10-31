@@ -75,7 +75,7 @@
     });
   }
 }
-const baseUrl ="https://api.around.mambodev.com"
+const baseUrl = import.meta.env.VITE_BASE_URL
 const headers = {
     "Content-Type": "application/json"
 }

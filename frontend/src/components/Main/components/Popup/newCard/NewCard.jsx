@@ -11,7 +11,6 @@ export default function NewCard({ onClose, onAddCard }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Enviando card:", { name: values.name, link: values.link });
     handleAddCard({ name: values.name, link: values.link })
       .then((newCard) => {
         onAddCard(newCard);

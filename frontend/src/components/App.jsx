@@ -45,9 +45,9 @@ function App() {
       .catch((err) => console.log("Erro ao buscar dados do usuário", err));
 
     api
-      .getCards()
-      .then((cards) =>setCards(cards.reverse()))
-      .catch((err) => console.log("Erro ao buscar cards:", err));
+    .getCards()
+    .then((cards) => setCards(cards.reverse()))
+    .catch((err) => console.log("Erro ao buscar cards:", err));
   }, [navigate]);
 
   const handleUpdateUser = (data) => {

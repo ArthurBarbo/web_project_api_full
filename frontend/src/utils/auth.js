@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.around.mambodev.com";
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
