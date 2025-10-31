@@ -46,7 +46,7 @@ function App() {
 
     api
       .getCards()
-      .then(setCards)
+      .then((cards) =>setCards(cards.reverse()))
       .catch((err) => console.log("Erro ao buscar cards:", err));
   }, [navigate]);
 

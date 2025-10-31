@@ -51,26 +51,39 @@ A aplicação funciona como uma **rede social de compartilhamento de imagens**, 
 
 ## 🗂️ Estrutura do Projeto
 
-📁 web_project_api_full/
+web_project_api_full/
 ├── 📁 backend/
 │ ├── app.js
 │ ├── package.json
-│ ├── routes/
-│ ├── controllers/
-│ ├── models/
-│ └── middlewares/
+│ ├── 📁 routes/
+│ ├── 📁 controllers/
+│ ├── 📁 models/
+│ ├── 📁 middlewares/
+│ └── 📁 utils/
 │
 ├── 📁 frontend/
-│ ├── src/
-│ │ ├── components/
-│ │ ├── contexts/
-│ │ ├── utils/
-│ │ ├── App.jsx
-│ │ └── index.jsx
-│ ├── public/
-│ └── package.json
+│ ├── 📁 dist/
+│ ├── 📁 node_modules/
+│ ├── 📁 public/
+│ ├── 📁 src/
+│ │ ├── 📁 assets/
+│ │ ├── 📁 blocks/
+│ │ ├── 📁 components/
+│ │ ├── 📁 contexts/
+│ │ ├── 📁 images/
+│ │ ├── 📁 pages/
+│ │ ├── 📁 utils/
+│ │ ├── index.css
+│ │ └── main.jsx
+│ ├── 📁 vendor/
+│ ├── .eslintrc.config.js
+│ ├── index.html
+│ ├── package.json
+│ ├── package-lock.json
+│ ├── vite.config.js
+│ └── README.md
 │
-└── README.md
+└── .gitignore
 
 
 ## 🔗 Endpoints da API
