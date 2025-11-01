@@ -18,7 +18,7 @@ export default function Main({ cards, setCards }) {
   const [cardToDelete, setCardToDelete] = useState(null);
 
   async function handleCardLike(card) {
-    const isLiked = card.likes.includes(currentUser._id);
+    const isLiked = card.likes.some((like) => like._id === currentUser._id || like === currentUser._id);
 
 
     await api
@@ -26,15 +26,10 @@ export default function Main({ cards, setCards }) {
       .then((newCard) => {
       
         setCards((state) =>
-          state.map((currentCard) => {
-       
-            
-           return currentCard._id === card._id ? newCard : currentCard
-          }
-          )
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
-      .catch((error) => console.error(error));
+      .catch((error) => console.error("erro ao curtir",error));
   }
 
   async function handleCardDelete(card) {

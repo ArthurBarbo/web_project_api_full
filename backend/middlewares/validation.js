@@ -46,6 +46,6 @@ export const validateUpdateUser = celebrate({
 
 export const validateId = celebrate({
   params: Joi.object({
-    id: Joi.string().hex().length(24).required(),
+    cardId: Joi.string().hex().length(24).required(),
   }),
 });

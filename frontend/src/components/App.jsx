@@ -50,6 +50,20 @@ function App() {
     .catch((err) => console.log("Erro ao buscar cards:", err));
   }, [navigate]);
 
+  const handleCardLike = (card) => {
+   
+    const isLiked = card.likes.some((id) => id === currentUser._id);
+  
+   
+    api.changeLikeCardStatus(card._id, !isLiked)
+      .then((updatedCard) => {
+        setCards((state) =>
+          state.map((c) => (c._id === card._id ? updatedCard : c))
+        );
+      })
+      .catch((err) => console.error("Erro ao atualizar like:", err));
+  };
+
   const handleUpdateUser = (data) => {
     api.updateUserInfo(data).then(setCurrentUser);
   };
@@ -113,7 +127,7 @@ function App() {
           element={
             <ProtectedRoute isLoggedIn={!!currentUser}>
               <Header onLogout={handleLogout} />
-              <Main cards={cards} setCards={setCards} />
+              <Main cards={cards} setCards={setCards} onCardLike={handleCardLike} />
               <Footer />
             </ProtectedRoute>
           }
